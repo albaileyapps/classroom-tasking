@@ -1,2 +1,2 @@
 # classroom-tasking
- A game fo use in classrooms
+ A game for use in classrooms
