@@ -12,6 +12,7 @@ func setup(p_title, p_message):
 	message.text = p_message
 	
 func _on_ExitButton_pressed():
+	SoundManager.play(SoundManager.CLICK)
 	fade_out_and_remove(0.0, FADE_DURATION)
 
 #click anywhere to remove this alert scene
@@ -24,4 +25,5 @@ func _on_Control_gui_input(event):
 			return
 		if OS.get_system_time_msecs() - touch_down_time > 500:
 			return
+		SoundManager.play(SoundManager.CLICK)
 		fade_out_and_remove(0.0, FADE_DURATION)

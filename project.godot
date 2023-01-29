@@ -51,6 +51,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Consts="*res://globals/consts.gd"
+SoundManager="*res://globals/SoundManager.gd"
 
 [display]
 

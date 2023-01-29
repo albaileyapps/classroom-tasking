@@ -37,10 +37,12 @@ func on_tasks_changed():
 	build_list()
 
 func _on_ExitButton_pressed():
+	SoundManager.play(SoundManager.CLICK)
 	emit_signal("remove_scene")
 
 
 func _on_AddTaskButton_pressed():
+	SoundManager.play(SoundManager.CLICK)
 	var id = str(rng.randi_range(0, 10000000))
 	var task = Task.new(id, "Title", "Description", [], false)
 	tasks.add_task(task)
@@ -59,7 +61,7 @@ func _on_delete_task(p_task):
 	print("delete task: ", p_task)
 	tasks.remove_task(p_task)
 
-
 func _on_SelectNoneButton_pressed():
+	SoundManager.play(SoundManager.CLICK)
 	for task in tasks.list:
 		task.is_selected = false

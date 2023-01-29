@@ -24,7 +24,7 @@ alignment = 1
 
 [node name="TitleLabel" type="Label" parent="CanvasLayer/Control/VBoxContainer" index="0"]
 margin_right = 944.0
-margin_bottom = 53.0
+margin_bottom = 50.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 4 )
 text = "Edit Tasks"
@@ -32,9 +32,9 @@ align = 1
 valign = 1
 
 [node name="ExplanationLabel" type="Label" parent="CanvasLayer/Control/VBoxContainer" index="1"]
-margin_top = 73.0
+margin_top = 70.0
 margin_right = 944.0
-margin_bottom = 122.0
+margin_bottom = 119.0
 size_flags_horizontal = 15
 custom_fonts/font = ExtResource( 5 )
 text = "Only tasks that you select here will show up when you hit start. Select a few tasks that are suitable for your students and your classroom. 5-8 tasks is usually plenty for me."
@@ -44,7 +44,7 @@ max_lines_visible = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Control/VBoxContainer" index="2"]
 unique_name_in_owner = true
-margin_top = 142.0
+margin_top = 139.0
 margin_right = 944.0
 margin_bottom = 477.0
 size_flags_horizontal = 3
@@ -53,7 +53,7 @@ scroll_deadzone = 12
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/ScrollContainer" index="0"]
 margin_right = 944.0
-margin_bottom = 335.0
+margin_bottom = 338.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 10
@@ -64,7 +64,7 @@ custom_constants/margin_bottom = 10
 unique_name_in_owner = true
 margin_left = 30.0
 margin_right = 934.0
-margin_bottom = 325.0
+margin_bottom = 328.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 10
@@ -90,8 +90,8 @@ margin_bottom = 23.0
 text = "Select None"
 
 [node name="ExitButton" type="TextureButton" parent="CanvasLayer/Control" index="1"]
-margin_right = 100.0
-margin_bottom = 100.0
+margin_right = 50.0
+margin_bottom = 50.0
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 6 )
 texture_hover = ExtResource( 6 )

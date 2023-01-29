@@ -60,9 +60,13 @@ func _on_Timer_timeout():
 	decrement()
 	
 func decrement():
-	print("decrement")
 	current_seconds -= 1
+	if current_minutes == 0 and 3 < current_seconds and current_seconds <= 10:
+		SoundManager.play(SoundManager.TICK)
+	if current_minutes == 0 and 0 < current_seconds and current_seconds <= 3:
+		SoundManager.play(SoundManager.BEEP)
 	if current_seconds == 0 and current_minutes == 0:
+		SoundManager.play(SoundManager.GONG)
 		$Timer.stop()
 	if current_seconds < 0:
 		current_minutes -= 1
@@ -70,13 +74,16 @@ func decrement():
 	_set_labels()
 
 func _on_StartButton_pressed():
+	SoundManager.play(SoundManager.CLICK)
 	if $Timer.is_stopped():
 		$Timer.start()
 
 func _on_PauseButton_pressed():
+	SoundManager.play(SoundManager.CLICK)
 	$Timer.stop()
 
 func _on_StopButton_pressed():
+	SoundManager.play(SoundManager.CLICK)
 	$Timer.stop()
 	current_minutes = settings.minutes
 	current_seconds = settings.seconds

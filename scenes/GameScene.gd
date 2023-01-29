@@ -28,7 +28,7 @@ func setup_button_grid(p_selected_tasks):
 		get_node("%TaskButtonGrid").add_child(btn)
 		
 func _on_task_button_pressed(p_btn):
-	print("task button pressed")
+	SoundManager.play(SoundManager.CLICK)
 	var new_task_scene = task_scene.instance()
 	new_task_scene.setup(p_btn.task)
 	new_task_scene.connect("remove_scene", self, "_on_remove_task_scene", [p_btn])
@@ -41,9 +41,12 @@ func _on_remove_task_scene(p_btn):
 	
 
 func _on_ExitButton_pressed():
+	SoundManager.play(SoundManager.CLICK)
+	SoundManager.play(SoundManager.CLICK)
 	emit_signal("remove_scene")
 
 func _on_EditTeamsButton_pressed():
+	SoundManager.play(SoundManager.CLICK)
 	var scene = load("res://scenes/EditTeams.tscn").instance()
 	scene.connect("remove_scene", self, "remove_edit_scene", [scene])
 	add_child_scene(scene, 0.0, FADE_DURATION)
@@ -52,11 +55,11 @@ func remove_edit_scene(p_scene):
 	p_scene.fade_out_and_remove(0.0, FADE_DURATION)
 
 func _on_ShowHideScoresButton_pressed():
+	SoundManager.play(SoundManager.CLICK)
 	scoreboard_shown = !scoreboard_shown
 	scoreboard.visible = scoreboard_shown
 	show_hide_scores_button.text = "Hide" if scoreboard_shown else "Show"
 	
-
-
 func _on_HelpButton_pressed():
+	SoundManager.play(SoundManager.CLICK)
 	show_alert("SCORES", "Click on a team to select it. Use the number buttons on your keyboard to assign points to the selected team.")

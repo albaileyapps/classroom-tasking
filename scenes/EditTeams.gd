@@ -31,6 +31,7 @@ func on_teams_changed():
 
 
 func _on_AddTeamButton_pressed():
+	SoundManager.play(SoundManager.CLICK)
 	var id = String(rng.randi_range(0, 10000000))
 	var team = Team.new(id, "New Team", 0)
 	teams.add_team(team)
@@ -39,12 +40,12 @@ func _on_AddTeamButton_pressed():
 func remove_team(p_team):
 	teams.remove_team(p_team)
 
-
 func _on_ResetScoresButton_pressed():
+	SoundManager.play(SoundManager.CLICK)
 	for team in teams.list:
 		team.score = 0
 
-
 func _on_ExitButton_pressed():
+	SoundManager.play(SoundManager.CLICK)
 	emit_signal("remove_scene")
 

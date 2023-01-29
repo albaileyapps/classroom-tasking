@@ -18,7 +18,7 @@ script = ExtResource( 3 )
 
 [node name="TeamNameTextEdit" type="LineEdit" parent="."]
 unique_name_in_owner = true
-margin_right = 986.0
+margin_right = 1038.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 5 )
@@ -27,8 +27,8 @@ caret_blink = true
 
 [node name="TeamScoreTextEdit" type="LineEdit" parent="."]
 unique_name_in_owner = true
-margin_left = 1006.0
-margin_right = 1080.0
+margin_left = 1058.0
+margin_right = 1130.0
 margin_bottom = 100.0
 custom_fonts/font = ExtResource( 5 )
 text = "0"
@@ -37,7 +37,7 @@ placeholder_text = "0"
 caret_blink = true
 
 [node name="RemoveButton" type="TextureButton" parent="."]
-margin_left = 1100.0
+margin_left = 1150.0
 margin_right = 1200.0
 margin_bottom = 100.0
 texture_normal = ExtResource( 1 )

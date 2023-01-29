@@ -12,5 +12,6 @@ func set_labels():
 	get_node("%DescriptionLabel").text = task.description
 
 func _on_ExitButton_pressed():
+	SoundManager.play(SoundManager.CLICK)
 	fade_out_and_remove(0.0, FADE_DURATION)
 	emit_signal("remove_scene")

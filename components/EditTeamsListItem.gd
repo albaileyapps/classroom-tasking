@@ -26,6 +26,7 @@ func _on_TeamScoreTextEdit_text_changed(p_text):
 	team.save()
 
 func _on_RemoveButton_pressed():
+	SoundManager.play(SoundManager.CLICK)
 	emit_signal("remove_team", team)
 	
 func on_team_changed():

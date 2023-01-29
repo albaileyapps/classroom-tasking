@@ -57,6 +57,7 @@ func _on_EditTasksListItem_gui_input(event):
 			return
 		if OS.get_system_time_msecs() - touch_down_time > 500:
 			return
+		SoundManager.play(SoundManager.CLICK)
 		task.is_selected = !task.is_selected
 		task.save()
 		
