@@ -51,30 +51,31 @@ text = "Edit Teams"
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control/VBoxContainer" index="2"]
 margin_top = 133.0
 margin_right = 944.0
-margin_bottom = 357.0
+margin_bottom = 372.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="StartButton" type="TextureButton" parent="CanvasLayer/Control/VBoxContainer/CenterContainer" index="0"]
-margin_left = 359.0
+margin_left = 360.0
+margin_top = 7.0
 margin_right = 584.0
-margin_bottom = 224.0
+margin_bottom = 231.0
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 8 )
 texture_hover = ExtResource( 7 )
 stretch_mode = 2
 
-[node name="Control" type="Control" parent="CanvasLayer/Control/VBoxContainer" index="3"]
-margin_top = 387.0
+[node name="Spacer" type="Control" parent="CanvasLayer/Control/VBoxContainer" index="3"]
+margin_top = 402.0
 margin_right = 944.0
-margin_bottom = 487.0
-rect_min_size = Vector2( 0, 100 )
+margin_bottom = 462.0
+rect_min_size = Vector2( 0, 60 )
 size_flags_horizontal = 3
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer" index="4"]
-margin_top = 517.0
+margin_top = 492.0
 margin_right = 944.0
-margin_bottom = 545.0
+margin_bottom = 520.0
 
 [node name="Container" type="Control" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer2" index="0"]
 margin_right = 912.0

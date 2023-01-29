@@ -27,7 +27,7 @@ margin_right = 944.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 4 )
-text = "Edit Tasks"
+text = "Tasks"
 align = 1
 valign = 1
 

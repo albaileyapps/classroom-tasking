@@ -1,12 +1,19 @@
 extends Resource
 class_name Tasks
 
+class CustomSorterTask:
+	static func sort(a: Task, b: Task):
+		if a.date_created > b.date_created:
+			return true
+		return false
+
 var list = []
 
 # Called when the node enters the scene tree for the first time.
 func _init():
 	print("tasks init")
 	load_tasks()
+	list.sort_custom(CustomSorterTask, "sort")
 	
 func add_task(p_task):
 	list.push_front(p_task)
@@ -29,6 +36,7 @@ func load_tasks():
 				print("Found directory: " + file_name)
 			else:
 				if file_name.ends_with(".tres"):
+					print("found a saved task")
 					var task = ResourceLoader.load(Consts.TASK_SAVE_PATH + file_name)
 					list.append(task)
 			file_name = dir.get_next()
@@ -50,3 +58,4 @@ func load_default_tasks():
 					list.append(task)
 			file_name = dir.get_next()
 			emit_changed()
+			

@@ -9,3 +9,4 @@ title = "title"
 description = "description"
 tags = [  ]
 is_selected = false
+date_created = 0

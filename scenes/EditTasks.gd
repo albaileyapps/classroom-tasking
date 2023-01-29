@@ -4,8 +4,6 @@ var tasks = preload("res://resources/tasks.tres")
 var task_list_item = preload("res://components/EditTasksListItem.tscn")
 var edit_task_scene = preload("res://scenes/EditTask.tscn")
 
-
-
 var rng = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
@@ -36,10 +34,6 @@ func on_tasks_changed():
 	remove_list_items()
 	build_list()
 
-func _on_ExitButton_pressed():
-	SoundManager.play(SoundManager.CLICK)
-	emit_signal("remove_scene")
-
 
 func _on_AddTaskButton_pressed():
 	SoundManager.play(SoundManager.CLICK)
@@ -65,3 +59,10 @@ func _on_SelectNoneButton_pressed():
 	SoundManager.play(SoundManager.CLICK)
 	for task in tasks.list:
 		task.is_selected = false
+		
+func _on_ExitButton_pressed():
+	
+	var error = ResourceSaver.save(Consts.TASK_SAVE_PATH + "test.tres", tasks)
+	
+	SoundManager.play(SoundManager.CLICK)
+	emit_signal("remove_scene")
