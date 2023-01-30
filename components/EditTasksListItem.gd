@@ -1,6 +1,6 @@
 extends Control
 
-var task = preload("res://resources/task_default.tres")
+var task
 var checked_texture = preload("res://assets/img/icon-checked.png")
 var unchecked_texture = preload("res://assets/img/icon-unchecked.png")
 onready var check_mark = $HBoxContainer/VBoxContainer3/CheckMark
@@ -59,8 +59,6 @@ func _on_EditTasksListItem_gui_input(event):
 			return
 		SoundManager.play(SoundManager.CLICK)
 		task.is_selected = !task.is_selected
-		task.save()
-		
 
 
 

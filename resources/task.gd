@@ -40,8 +40,5 @@ func add_tag(p_tag):
 func _set_date_created(p_date):
 	date_created = p_date
 	
-func save():
-	if date_created == 0:
-		date_created = OS.get_system_time_msecs()
-	var error = ResourceSaver.save(Consts.TASK_SAVE_PATH + id + ".tres", self)
+
 	
