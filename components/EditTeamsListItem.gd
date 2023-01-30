@@ -18,12 +18,10 @@ func set_text():
 	
 func _on_TeamNameTextEdit_text_changed(p_text):
 	team.team_name = p_text
-	team.save()
 
 func _on_TeamScoreTextEdit_text_changed(p_text):
 	print(p_text)
 	team.score = int(p_text)
-	team.save()
 
 func _on_RemoveButton_pressed():
 	SoundManager.play(SoundManager.CLICK)

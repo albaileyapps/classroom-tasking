@@ -1,6 +1,6 @@
 extends "res://scenes/SceneBase.gd"
 
-var teams = preload("res://resources/teams.tres")
+var teams: Teams
 var team_list_item = preload("res://components/EditTeamsListItem.tscn")
 
 var rng = RandomNumberGenerator.new()
@@ -9,6 +9,9 @@ func _ready():
 	rng.randomize()
 	build_list()
 	teams.connect("changed", self, "on_teams_changed")
+	
+func setup(p_teams):
+	teams = p_teams
 	
 func build_list():
 	for team in teams.list:
@@ -26,6 +29,9 @@ func add_list_item(p_team):
 	get_node("%TeamList").add_child(list_item)
 	
 func on_teams_changed():
+	pass
+	
+func rebuild_list():
 	remove_list_items()
 	build_list()
 
@@ -35,10 +41,11 @@ func _on_AddTeamButton_pressed():
 	var id = String(rng.randi_range(0, 10000000))
 	var team = Team.new(id, "New Team", 0)
 	teams.add_team(team)
-	team.save()
+	rebuild_list()
 	
 func remove_team(p_team):
 	teams.remove_team(p_team)
+	rebuild_list()
 
 func _on_ResetScoresButton_pressed():
 	SoundManager.play(SoundManager.CLICK)

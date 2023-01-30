@@ -3,8 +3,8 @@ extends "res://scenes/SceneBase.gd"
 onready var show_hide_scores_button = $CanvasLayer/Control/HBoxContainer2/HBoxContainer/ShowHideScoresButton
 onready var scoreboard = $CanvasLayer/Control/VBoxContainer/HBoxContainer/Scoreboard
 
+var session: Session
 
-var tasks = preload("res://resources/tasks.tres")
 var task_button = preload("res://components/TaskButton.tscn")
 var task_scene = preload("res://scenes/TaskScene.tscn")
 
@@ -13,11 +13,18 @@ var scoreboard_shown = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print("gamescene ready")
 	var selected_tasks = []
-	for task in tasks.list:
+	for task in session.tasks.list:
 		if task.is_selected:
 			selected_tasks.append(task)
 	setup_button_grid(selected_tasks)
+	scoreboard.setup(session.teams)
+	
+#call this before adding to scene
+func setup(p_session):
+	print("gamescene setup")
+	session = p_session
 
 func setup_button_grid(p_selected_tasks):
 	for i in p_selected_tasks.size():
@@ -48,11 +55,13 @@ func _on_ExitButton_pressed():
 func _on_EditTeamsButton_pressed():
 	SoundManager.play(SoundManager.CLICK)
 	var scene = load("res://scenes/EditTeams.tscn").instance()
+	scene.setup(session.teams)
 	scene.connect("remove_scene", self, "remove_edit_scene", [scene])
 	add_child_scene(scene, 0.0, FADE_DURATION)
 	
 func remove_edit_scene(p_scene):
 	p_scene.fade_out_and_remove(0.0, FADE_DURATION)
+	scoreboard.build_team_list()
 
 func _on_ShowHideScoresButton_pressed():
 	SoundManager.play(SoundManager.CLICK)
@@ -63,3 +72,7 @@ func _on_ShowHideScoresButton_pressed():
 func _on_HelpButton_pressed():
 	SoundManager.play(SoundManager.CLICK)
 	show_alert("SCORES", "Click on a team to select it. Use the number buttons on your keyboard to assign points to the selected team.")
+
+func save_session():
+	var error = ResourceSaver.save(Consts.SESSION_SAVE_FILE % session.id, session)
+	print("GameScene saving session: ", error)

@@ -31,7 +31,3 @@ func get_score():
 func _set_date_created(p_date):
 	date_created = p_date
 	
-func save():
-	if date_created == 0:
-		date_created = OS.get_system_time_msecs()
-	var error = ResourceSaver.save(Consts.TEAM_SAVE_PATH + id + ".tres", self)

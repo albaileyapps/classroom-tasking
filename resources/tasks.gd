@@ -27,4 +27,12 @@ func add_task(p_task):
 func remove_task(p_task):
 	list.erase(p_task)
 	emit_changed()
+	
+func get_duplicate() -> Tasks:
+	var duplicate_tasks = self.duplicate(false)
+	duplicate_tasks.list = []
+	for task in list:
+		duplicate_tasks.add_task(task.duplicate())
+	return duplicate_tasks
+	
 
