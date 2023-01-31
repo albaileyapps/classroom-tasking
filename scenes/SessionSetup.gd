@@ -9,6 +9,7 @@ func _on_StartButton_pressed():
 	var title = session_title_line_edit.text
 	if title.length() > 0:
 		emit_signal("start_session", title)
+		fade_out_and_remove(1.0, FADE_DURATION)
 
 
 func _on_CancelButton_pressed():

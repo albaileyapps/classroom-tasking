@@ -16,6 +16,7 @@ func _init(p_id = "", p_title = "", p_last_saved = 0, p_tasks: Tasks = null, p_t
 	
 	
 func setup():
+	print("session setup")
 	tasks.setup()
 	teams.setup()
 	tasks.connect("changed", self, "save")

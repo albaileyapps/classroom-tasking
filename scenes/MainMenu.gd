@@ -33,6 +33,7 @@ func create_session(p_title):
 	var session = Session.new(Utils.id(), p_title, 0, tasks_default.duplicate_selected(), Teams.new())
 	session.setup()
 	session.save()
+	add_saved_session_button(session)
 	start_game_scene(session)
 	
 	
@@ -70,11 +71,18 @@ func load_saved_sessions():
 func add_saved_session_button(p_session: Session):
 	var btn = saved_session_list_item.instance()
 	btn.setup(p_session.id, p_session.title)
-	btn.connect("session_selected", self, "_on_saved_session_selected")
+	btn.connect("session_select", self, "_on_saved_session_select")
+	btn.connect("session_delete", self, "_on_saved_session_delete")
 	saved_session_list.add_child(btn)
 	
-func _on_saved_session_selected(p_id: String):
+func _on_saved_session_select(p_id: String):
 	var session = ResourceLoader.load(Consts.SESSION_SAVE_FILE % p_id)
 	if session is Session:
 		session.setup()
 		start_game_scene(session)
+		
+func _on_saved_session_delete(p_btn):
+	var dir = Directory.new()
+	dir.remove(Consts.SESSION_SAVE_FILE % p_btn.id)
+	saved_session_list.remove_child(p_btn)
+	

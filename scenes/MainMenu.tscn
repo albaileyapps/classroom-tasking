@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/SceneBase.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/img/btn-main-start.png" type="Texture" id=6]
 [ext_resource path="res://assets/img/btn-main-start-hover.png" type="Texture" id=7]
 [ext_resource path="res://assets/img/btn-main-start-pressed.png" type="Texture" id=8]
+[ext_resource path="res://themes/small_font.tres" type="DynamicFont" id=9]
 
 [node name="MainMenu" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
@@ -61,16 +62,17 @@ stretch_mode = 2
 [node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer" index="3"]
 margin_top = 327.0
 margin_right = 944.0
-margin_bottom = 361.0
+margin_bottom = 358.0
+custom_fonts/font = ExtResource( 9 )
 text = "Saved Sessions:"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Control/VBoxContainer" index="4"]
-margin_top = 371.0
+margin_top = 368.0
 margin_right = 944.0
 margin_bottom = 520.0
 size_flags_vertical = 3
 
-[node name="SavedSessionList" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer/ScrollContainer" index="2"]
+[node name="SavedSessionList" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer/ScrollContainer" index="0"]
 margin_right = 944.0
 size_flags_horizontal = 3
 

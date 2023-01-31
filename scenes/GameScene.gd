@@ -25,7 +25,6 @@ func _ready():
 	
 #call this before adding to scene
 func setup(p_session):
-	print("gamescene setup")
 	session = p_session
 
 func setup_button_grid(p_selected_tasks):

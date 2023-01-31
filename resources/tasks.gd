@@ -32,7 +32,7 @@ func duplicate_selected() -> Tasks:
 	duplicate_tasks.list = []
 	for task in list:
 		if task.is_selected:
-			duplicate_tasks.add_task(task.duplicate())
+			duplicate_tasks.list.append(task.duplicate())
 	return duplicate_tasks
 	
 

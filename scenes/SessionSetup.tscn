@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/SceneBase.tscn" type="PackedScene" id=1]
-[ext_resource path="res://SessionSetup.gd" type="Script" id=2]
+[ext_resource path="res://scenes/SessionSetup.gd" type="Script" id=2]
 [ext_resource path="res://themes/large_font.tres" type="DynamicFont" id=3]
 
 [node name="SessionSetup" instance=ExtResource( 1 )]
