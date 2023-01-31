@@ -15,7 +15,6 @@ func _init():
 	
 func setup():
 	for task in list:
-		print("connecting task signal")
 		task.connect("changed", self, "emit_changed")
 	list.sort_custom(CustomSorterTask, "sort")
 	
@@ -28,11 +27,12 @@ func remove_task(p_task):
 	list.erase(p_task)
 	emit_changed()
 	
-func get_duplicate() -> Tasks:
+func duplicate_selected() -> Tasks:
 	var duplicate_tasks = self.duplicate(false)
 	duplicate_tasks.list = []
 	for task in list:
-		duplicate_tasks.add_task(task.duplicate())
+		if task.is_selected:
+			duplicate_tasks.add_task(task.duplicate())
 	return duplicate_tasks
 	
 

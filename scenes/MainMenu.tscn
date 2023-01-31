@@ -19,7 +19,7 @@ margin_left = 40.0
 margin_top = 40.0
 margin_right = -40.0
 margin_bottom = -40.0
-custom_constants/separation = 30
+custom_constants/separation = 10
 
 [node name="TitleLabel" type="Label" parent="CanvasLayer/Control/VBoxContainer" index="0"]
 margin_right = 944.0
@@ -30,59 +30,63 @@ align = 1
 valign = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer" index="1"]
-margin_top = 80.0
+margin_top = 60.0
 margin_right = 944.0
-margin_bottom = 103.0
+margin_bottom = 83.0
 custom_constants/separation = 20
 alignment = 1
 
 [node name="EditTasksButton" type="LinkButton" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer" index="0"]
-margin_left = 384.0
-margin_right = 458.0
+margin_left = 427.0
+margin_right = 517.0
 margin_bottom = 23.0
-text = "Edit Tasks"
-
-[node name="EditTeamsButton" type="LinkButton" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer" index="1"]
-margin_left = 478.0
-margin_right = 559.0
-margin_bottom = 23.0
-text = "Edit Teams"
+text = "Select Tasks"
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control/VBoxContainer" index="2"]
-margin_top = 133.0
+margin_top = 93.0
 margin_right = 944.0
-margin_bottom = 372.0
+margin_bottom = 317.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="StartButton" type="TextureButton" parent="CanvasLayer/Control/VBoxContainer/CenterContainer" index="0"]
 margin_left = 360.0
-margin_top = 7.0
 margin_right = 584.0
-margin_bottom = 231.0
+margin_bottom = 224.0
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 8 )
 texture_hover = ExtResource( 7 )
 stretch_mode = 2
 
-[node name="Spacer" type="Control" parent="CanvasLayer/Control/VBoxContainer" index="3"]
-margin_top = 402.0
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer" index="3"]
+margin_top = 327.0
 margin_right = 944.0
-margin_bottom = 462.0
-rect_min_size = Vector2( 0, 60 )
-size_flags_horizontal = 3
+margin_bottom = 361.0
+text = "Saved Sessions:"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer" index="4"]
-margin_top = 492.0
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Control/VBoxContainer" index="4"]
+margin_top = 371.0
 margin_right = 944.0
 margin_bottom = 520.0
+size_flags_vertical = 3
 
-[node name="Container" type="Control" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer2" index="0"]
+[node name="SavedSessionList" type="VBoxContainer" parent="CanvasLayer/Control/VBoxContainer/ScrollContainer" index="2"]
+margin_right = 944.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Control" index="1"]
+anchor_right = 1.0
+margin_left = 40.0
+margin_top = 40.0
+margin_right = -40.0
+margin_bottom = 68.0
+
+[node name="Container" type="Control" parent="CanvasLayer/Control/HBoxContainer2" index="0"]
 margin_right = 912.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 
-[node name="HelpButton" type="TextureButton" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer2" index="1"]
+[node name="HelpButton" type="TextureButton" parent="CanvasLayer/Control/HBoxContainer2" index="1"]
 margin_left = 916.0
 margin_right = 944.0
 margin_bottom = 28.0
@@ -91,6 +95,5 @@ texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 4 )
 
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer/EditTasksButton" to="." method="_on_EditTasksButton_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer/EditTeamsButton" to="." method="_on_EditTeamsButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/CenterContainer/StartButton" to="." method="_on_StartButton_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer2/HelpButton" to="." method="_on_HelpButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/HBoxContainer2/HelpButton" to="." method="_on_HelpButton_pressed"]

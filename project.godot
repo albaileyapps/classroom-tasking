@@ -58,6 +58,7 @@ config/icon="res://icon.png"
 
 Consts="*res://globals/consts.gd"
 SoundManager="*res://globals/SoundManager.gd"
+Utils="*res://globals/Utils.gd"
 
 [display]
 

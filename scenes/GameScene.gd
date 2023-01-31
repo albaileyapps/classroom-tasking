@@ -2,6 +2,7 @@ extends "res://scenes/SceneBase.gd"
 
 onready var show_hide_scores_button = $CanvasLayer/Control/HBoxContainer2/HBoxContainer/ShowHideScoresButton
 onready var scoreboard = $CanvasLayer/Control/VBoxContainer/HBoxContainer/Scoreboard
+onready var title_label = $CanvasLayer/Control/VBoxContainer/TitleLabel
 
 var session: Session
 
@@ -20,6 +21,7 @@ func _ready():
 			selected_tasks.append(task)
 	setup_button_grid(selected_tasks)
 	scoreboard.setup(session.teams)
+	title_label.text = session.title
 	
 #call this before adding to scene
 func setup(p_session):
@@ -54,6 +56,7 @@ func _on_ExitButton_pressed():
 
 func _on_EditTeamsButton_pressed():
 	SoundManager.play(SoundManager.CLICK)
+	scoreboard.select_none()
 	var scene = load("res://scenes/EditTeams.tscn").instance()
 	scene.setup(session.teams)
 	scene.connect("remove_scene", self, "remove_edit_scene", [scene])

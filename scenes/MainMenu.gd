@@ -1,12 +1,15 @@
 extends "res://scenes/SceneBase.gd"
 
 var tasks_default = preload("res://resources/tasks_default.tres")
+onready var saved_session_list = $CanvasLayer/Control/VBoxContainer/ScrollContainer/SavedSessionList
+var saved_session_list_item = preload("res://components/SavedSessionListItem.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	load_saved_defaults()
 	tasks_default.setup()
 	tasks_default.connect("changed", self, "_on_tasks_default_changed")
+	load_saved_sessions()
 	
 func _on_tasks_default_changed():
 	var error = ResourceSaver.save(Consts.TASKS_SAVED_DEFAULTS, tasks_default)
@@ -19,26 +22,26 @@ func _on_EditTasksButton_pressed():
 	scene.connect("remove_scene", self, "remove_child_and_fade_in", [scene])
 	fade(0.0, 0.0, FADE_DURATION)
 	add_child_scene(scene, FADE_DURATION, FADE_DURATION)
-
-func _on_EditTeamsButton_pressed():
-#	SoundManager.play(SoundManager.CLICK)
-#	var scene = load("res://scenes/EditTeams.tscn")
-#	scene.setup(teams_default)
-#	scene.connect("remove_scene", self, "remove_child_and_fade_in", [scene])
-#	fade(0.0, 0.0, FADE_DURATION)
-#	add_child_scene(scene, FADE_DURATION, FADE_DURATION)
-	pass
 	
 func _on_StartButton_pressed():
 	SoundManager.play(SoundManager.CLICK)
+	var session_setup = load("res://scenes/SessionSetup.tscn").instance()
+	session_setup.connect("start_session", self, "create_session")
+	add_child_scene(session_setup, 0.0, FADE_DURATION)
+		
+func create_session(p_title):
+	var session = Session.new(Utils.id(), p_title, 0, tasks_default.duplicate_selected(), Teams.new())
+	session.setup()
+	session.save()
+	start_game_scene(session)
+	
+	
+func start_game_scene(p_session):
 	var scene = load("res://scenes/GameScene.tscn").instance()
-	var id = RandomNumberGenerator.new().randi_range(0, 10000000)
-	var session = Session.new(String(id), "new session", 0, tasks_default.get_duplicate(), Teams.new())
-	scene.setup(session)
+	scene.setup(p_session)
 	scene.connect("remove_scene", self, "remove_child_and_fade_in", [scene])
 	fade(0.0, 0.0, FADE_DURATION)
 	add_child_scene(scene, FADE_DURATION, FADE_DURATION)
-	pass
 
 func _on_HelpButton_pressed():
 	SoundManager.play(SoundManager.CLICK)
@@ -50,4 +53,28 @@ func load_saved_defaults():
 	var saved_tasks = ResourceLoader.load(Consts.TASKS_SAVED_DEFAULTS)
 	if saved_tasks is Tasks:
 		tasks_default = saved_tasks
+		
+func load_saved_sessions():
+	var dir = Directory.new()
+	if dir.open(Consts.SESSION_SAVE_DIR) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if !dir.current_is_dir() and file_name.get_extension() == "tres":
+				var session = ResourceLoader.load(Consts.SESSION_SAVE_DIR + file_name)
+				if session is Session:
+					add_saved_session_button(session)
+			file_name = dir.get_next()
+
 	
+func add_saved_session_button(p_session: Session):
+	var btn = saved_session_list_item.instance()
+	btn.setup(p_session.id, p_session.title)
+	btn.connect("session_selected", self, "_on_saved_session_selected")
+	saved_session_list.add_child(btn)
+	
+func _on_saved_session_selected(p_id: String):
+	var session = ResourceLoader.load(Consts.SESSION_SAVE_FILE % p_id)
+	if session is Session:
+		session.setup()
+		start_game_scene(session)

@@ -11,6 +11,9 @@ export(Array, Resource) var list = [Team.new("0001", "Team 1", 0, 0), Team.new("
 
 # Called when the node enters the scene tree for the first time.
 func _init():
+	pass
+	
+func setup():
 	for team in list:
 		print("connecting team signal")
 		team.connect("changed", self, "emit_changed")

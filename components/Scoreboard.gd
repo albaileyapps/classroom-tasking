@@ -7,17 +7,12 @@ onready var team_labels_vbox = $MarginContainer/TeamLabelsVBox
 
 const SCOREBOARD_ITEM_GROUP = "scoreboard_item_group"
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	print("scoreboard ready")
-	
+
 
 #call this before adding to scene
 func setup(p_teams):
-	print("scoreboard setup")
 	teams = p_teams
 	build_team_list()
-#	teams.connect("changed", self, "build_team_list")
 
 func build_team_list():
 	remove_list_items()
@@ -38,3 +33,8 @@ func on_team_pressed(p_team):
 	for label in team_labels:
 		label.is_selected = false
 	p_team.is_selected = !original_val
+	
+func select_none():
+	var team_labels = get_tree().get_nodes_in_group(SCOREBOARD_ITEM_GROUP)
+	for label in team_labels:
+		label.is_selected = false

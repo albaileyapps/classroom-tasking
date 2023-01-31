@@ -13,9 +13,17 @@ func _init(p_id = "", p_title = "", p_last_saved = 0, p_tasks: Tasks = null, p_t
 	last_saved = p_last_saved
 	tasks = p_tasks
 	teams = p_teams
+	
+	
+func setup():
+	tasks.setup()
+	teams.setup()
+	tasks.connect("changed", self, "save")
+	teams.connect("changed", self, "save")
 
 func save():
+	print("saving session")
 	last_saved = OS.get_system_time_msecs()
-	var error = ResourceSaver.save(Consts.SESSION_SAVE_PATH + id + ".tres", self)
+	var error = ResourceSaver.save(Consts.SESSION_SAVE_FILE % id, self)
 
 

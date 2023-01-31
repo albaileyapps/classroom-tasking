@@ -45,7 +45,6 @@ func _on_AddTaskButton_pressed():
 	var task = Task.new(id, "Title", "Description", [], false)
 	tasks.add_task(task)
 	edit_task(task, 0.2)
-#	get_node("%ScrollContainer").scroll_vertical = get_node("%ScrollContainer").get_v_scrollbar().max_value
 
 	
 func edit_task(p_task, p_delay):
