@@ -15,3 +15,6 @@ func _on_ExitButton_pressed():
 	SoundManager.play(SoundManager.CLICK)
 	fade_out_and_remove(0.0, FADE_DURATION)
 	emit_signal("remove_scene")
+	
+func _unhandled_key_input(event):
+	get_tree().set_input_as_handled() 

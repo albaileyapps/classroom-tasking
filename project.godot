@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Resource",
+"class": "Session",
+"language": "GDScript",
+"path": "res://resources/session.gd"
+}, {
+"base": "Resource",
 "class": "Task",
 "language": "GDScript",
 "path": "res://resources/task.gd"
@@ -35,6 +40,7 @@ _global_script_classes=[ {
 "path": "res://resources/timer_settings.gd"
 } ]
 _global_script_class_icons={
+"Session": "",
 "Task": "",
 "Tasks": "",
 "Team": "",
@@ -52,11 +58,12 @@ config/icon="res://icon.png"
 
 Consts="*res://globals/consts.gd"
 SoundManager="*res://globals/SoundManager.gd"
+Utils="*res://globals/Utils.gd"
 
 [display]
 
-window/size/test_width=1024
-window/size/test_height=600
+window/size/test_width=1280
+window/size/test_height=800
 window/stretch/aspect="expand"
 
 [gui]

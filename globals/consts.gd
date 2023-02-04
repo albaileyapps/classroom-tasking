@@ -1,9 +1,9 @@
 extends Node
 
-var TASK_SAVE_PATH = "user://saved_task/"
-var TASK_DEFAULT_PATH = "res://resources/default_tasks/"
+var TASKS_SAVED_DEFAULTS = "user://tasks_saved_defaults.tres"
+var TEAMS_SAVED_DEFAULTS = "user://teams_saved_defaults.tres"
 
-var TEAM_SAVE_PATH = "user://saved_team/"
-var TEAM_DEFAULT_PATH = "res://resources/default_teams/"
+var SESSION_SAVE_DIR = "user://sessions/"
+var SESSION_SAVE_FILE = "user://sessions/%s.tres"
 
 var TIMER_SAVE_FILE = "user://saved_timer_settings.tres"

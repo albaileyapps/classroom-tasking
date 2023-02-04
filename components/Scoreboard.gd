@@ -1,17 +1,18 @@
 extends Control
 
-var teams = preload("res://resources/teams.tres")
+var teams: Teams
 var team_label = preload("res://components/ScoreboardListItem.tscn")
 var selected_team
-onready var team_labels_vbox = $MarginContainer/TeamLabelsVBox
+onready var team_labels_vbox = $TeamLabelsVBox
 
 const SCOREBOARD_ITEM_GROUP = "scoreboard_item_group"
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	build_team_list()
-	teams.connect("changed", self, "build_team_list")
 
+
+#call this before adding to scene
+func setup(p_teams):
+	teams = p_teams
+	build_team_list()
 
 func build_team_list():
 	remove_list_items()
@@ -32,3 +33,8 @@ func on_team_pressed(p_team):
 	for label in team_labels:
 		label.is_selected = false
 	p_team.is_selected = !original_val
+	
+func select_none():
+	var team_labels = get_tree().get_nodes_in_group(SCOREBOARD_ITEM_GROUP)
+	for label in team_labels:
+		label.is_selected = false

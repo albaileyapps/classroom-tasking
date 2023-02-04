@@ -8,7 +8,6 @@ export var date_created: int = 0 setget _set_date_created
 
 #overriding _init must have default values set for all args for ResourceSaver/Loader to work properly
 func _init(p_id = "", p_name = "", p_score = 0, p_date_created = 0):
-	print("init team")
 	id = p_id
 	team_name = p_name
 	score = p_score
@@ -31,7 +30,3 @@ func get_score():
 func _set_date_created(p_date):
 	date_created = p_date
 	
-func save():
-	if date_created == 0:
-		date_created = OS.get_system_time_msecs()
-	var error = ResourceSaver.save(Consts.TEAM_SAVE_PATH + id + ".tres", self)

@@ -1,10 +1,13 @@
 extends "res://scenes/SceneBase.gd"
 
-var tasks = preload("res://resources/tasks.tres")
+var tasks
 var task_list_item = preload("res://components/EditTasksListItem.tscn")
 var edit_task_scene = preload("res://scenes/EditTask.tscn")
 
 var rng = RandomNumberGenerator.new()
+
+func setup(p_tasks):
+	tasks = p_tasks
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,15 +36,15 @@ func remove_task():
 func on_tasks_changed():
 	remove_list_items()
 	build_list()
+#	tasks.save()
 
 
 func _on_AddTaskButton_pressed():
 	SoundManager.play(SoundManager.CLICK)
 	var id = str(rng.randi_range(0, 10000000))
-	var task = Task.new(id, "Title", "Description", [], false)
+	var task = Task.new(id, "Title", "Description", [], false, false, OS.get_system_time_msecs())
 	tasks.add_task(task)
 	edit_task(task, 0.2)
-#	get_node("%ScrollContainer").scroll_vertical = get_node("%ScrollContainer").get_v_scrollbar().max_value
 
 	
 func edit_task(p_task, p_delay):
@@ -61,8 +64,5 @@ func _on_SelectNoneButton_pressed():
 		task.is_selected = false
 		
 func _on_ExitButton_pressed():
-	
-	var error = ResourceSaver.save(Consts.TASK_SAVE_PATH + "test.tres", tasks)
-	
 	SoundManager.play(SoundManager.CLICK)
 	emit_signal("remove_scene")
