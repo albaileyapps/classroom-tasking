@@ -4,6 +4,6 @@
 font_path = "res://assets/font/NotoSans-Regular.ttf"
 
 [resource]
-size = 64
+size = 46
 use_mipmaps = true
 font_data = SubResource( 1 )

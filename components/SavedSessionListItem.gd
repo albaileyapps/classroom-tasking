@@ -16,8 +16,10 @@ func setup(p_id, p_title):
 	title = p_title
 
 func _on_StartSessionButton_pressed():
+	SoundManager.play(SoundManager.CLICK)
 	emit_signal("session_select", id)
 
 
 func _on_DeleteButton_pressed():
+	SoundManager.play(SoundManager.CLICK)
 	emit_signal("session_delete", self)

@@ -1,6 +1,6 @@
 extends "res://scenes/SceneBase.gd"
 
-var tasks_default = preload("res://resources/tasks_default.tres")
+var tasks_default = preload("res://resources/tasks_defaults.tres")
 onready var saved_session_list = $CanvasLayer/Control/VBoxContainer/ScrollContainer/SavedSessionList
 var saved_session_list_item = preload("res://components/SavedSessionListItem.tscn")
 
@@ -27,7 +27,9 @@ func _on_StartButton_pressed():
 	SoundManager.play(SoundManager.CLICK)
 	var session_setup = load("res://scenes/SessionSetup.tscn").instance()
 	session_setup.connect("start_session", self, "create_session")
-	add_child_scene(session_setup, 0.0, FADE_DURATION)
+	session_setup.connect("cancel_session_setup", self, "_on_cancel_session_setup")
+	fade(0.0, 0.0, FADE_DURATION)
+	add_child_scene(session_setup, FADE_DURATION, FADE_DURATION)
 		
 func create_session(p_title):
 	var session = Session.new(Utils.id(), p_title, 0, tasks_default.duplicate_selected(), Teams.new())
@@ -35,6 +37,9 @@ func create_session(p_title):
 	session.save()
 	add_saved_session_button(session)
 	start_game_scene(session)
+	
+func _on_cancel_session_setup():
+	fade(1.0, FADE_DURATION, FADE_DURATION)
 	
 	
 func start_game_scene(p_session):
@@ -47,10 +52,12 @@ func start_game_scene(p_session):
 func _on_HelpButton_pressed():
 	SoundManager.play(SoundManager.CLICK)
 	var title = "How To Use"
-	var message = "Before your lesson, click Edit Tasks and choose a few tasks that are suitable for your classroom. You can create your own tasks by clicking 'Add Task'. \n\n Click 'Edit Teams' to enter your student/team names - you can edit this during the lesson. \n\nThen click the start button. Click one of the numbered buttons to select a task. Set and start the timer if you wish. \n\nWhen the task is over, assign points by clicking on a team and using the numbers on your keyboard."
+	var message = "Before your lesson, click Edit Tasks and choose a few tasks that are suitable for your classroom. You can create your own tasks by clicking 'Add Task'. \n\nClick the start button to create a new session and give it a title (usually the class name).\n\nThen on the game scene, use the numbered buttons to choose a task and the scoreboard to assign points (use the number keys on your keyboard). Sessions are saved automatically, so you can play over several lessons if needed."
 	show_alert(title, message)
 
 func load_saved_defaults():
+	var dir = Directory.new()
+	if !dir.file_exists(Consts.TASKS_SAVED_DEFAULTS): return
 	var saved_tasks = ResourceLoader.load(Consts.TASKS_SAVED_DEFAULTS)
 	if saved_tasks is Tasks:
 		tasks_default = saved_tasks

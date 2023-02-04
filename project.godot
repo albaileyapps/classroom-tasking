@@ -62,8 +62,8 @@ Utils="*res://globals/Utils.gd"
 
 [display]
 
-window/size/test_width=1024
-window/size/test_height=600
+window/size/test_width=1280
+window/size/test_height=800
 window/stretch/aspect="expand"
 
 [gui]

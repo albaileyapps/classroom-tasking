@@ -36,6 +36,7 @@ func _set_is_selected(p_val):
 	emit_changed()
 	
 func _set_is_completed(p_val):
+	print("task is completed")
 	is_completed = p_val
 	emit_changed()
 

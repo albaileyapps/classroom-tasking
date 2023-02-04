@@ -42,7 +42,7 @@ func on_tasks_changed():
 func _on_AddTaskButton_pressed():
 	SoundManager.play(SoundManager.CLICK)
 	var id = str(rng.randi_range(0, 10000000))
-	var task = Task.new(id, "Title", "Description", [], false)
+	var task = Task.new(id, "Title", "Description", [], false, false, OS.get_system_time_msecs())
 	tasks.add_task(task)
 	edit_task(task, 0.2)
 

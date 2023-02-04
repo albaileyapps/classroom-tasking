@@ -1,9 +1,9 @@
 extends "res://scenes/SceneBase.gd"
 
-onready var show_hide_scores_button = $CanvasLayer/Control/HBoxContainer2/HBoxContainer/ShowHideScoresButton
+onready var show_hide_scores_button = $CanvasLayer/Control/VBoxContainer/HBoxContainer2/ShowHideScoresButton
 onready var scoreboard = $CanvasLayer/Control/VBoxContainer/HBoxContainer/Scoreboard
 onready var title_label = $CanvasLayer/Control/VBoxContainer/TitleLabel
-
+onready var task_button_scroll_container  = $CanvasLayer/Control/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer
 var session: Session
 
 var task_button = preload("res://components/TaskButton.tscn")
@@ -30,8 +30,7 @@ func setup(p_session):
 func setup_button_grid(p_selected_tasks):
 	for i in p_selected_tasks.size():
 		var btn = task_button.instance()
-		btn.task = p_selected_tasks[i]
-		btn.text = String(i + 1)
+		btn.setup(p_selected_tasks[i], String(i+1))
 		btn.connect("pressed", self, "_on_task_button_pressed", [btn])
 		get_node("%TaskButtonGrid").add_child(btn)
 		
@@ -44,6 +43,7 @@ func _on_task_button_pressed(p_btn):
 	add_child_scene(new_task_scene, FADE_DURATION, FADE_DURATION)
 		
 func _on_remove_task_scene(p_btn):
+	p_btn.task.is_completed = true
 	p_btn.animate_star()
 	fade(1.0, FADE_DURATION, FADE_DURATION)
 	
@@ -78,3 +78,14 @@ func _on_HelpButton_pressed():
 func save_session():
 	var error = ResourceSaver.save(Consts.SESSION_SAVE_FILE % session.id, session)
 	print("GameScene saving session: ", error)
+
+func _on_ScrollContainer_resized():
+	pass		
+
+func _on_PlusButton_pressed():
+	if $"%TaskButtonGrid".columns > 5: return
+	$"%TaskButtonGrid".columns += 1
+
+func _on_MinusButton_pressed():
+	if $"%TaskButtonGrid".columns < 2: return
+	$"%TaskButtonGrid".columns -= 1
